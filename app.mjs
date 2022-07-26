@@ -1,17 +1,133 @@
-function startApp() {
-    // Your entire app should not necessarily be coded inside this 
-    // single function (though there's no penalty for that), 
-    // so create and use/call additional functions from here
-  
-    // pls remove the below and make some magic in here!
-    console.log('make magic in here!');
-  
-    const header = document.querySelector('h2');
-    if(header) {
-      header.textContent = 'make some magic here!!';
+let airtelCode = ["0802", "0902", "0701", "0808", "0708", "0812"];
+let gloCode = ["0805", "0905", "0807", "0811", "0705", "0815"];
+let etisalatCode = ["0908", "0818", "0809", "0817", "0909"];
+let mtnCode = ["0803", "0703", "0903", "0806", "0706", "0813", "0810", "0814", "0816"];
+let teleNo = document.querySelector("#tele");
+let networkLogo = document.querySelector("#tele-label");
+let error = document.querySelector("#error");
+let fname = document.querySelector("#fname");
+let lname = document.querySelector("#lname");
+let email = document.querySelector("#email");
+let pass = document.querySelector("#password");
+
+teleNo.addEventListener("input", displayNetwork);
+function displayNetwork() {
+  if (teleNo.value.trim() === "") {
+    networkLogo.style.background = "none"
+  }
+  //displaying Airtel logo
+  for (let i = 0; i < airtelCode.length; i++) {
+
+
+    if (teleNo.value === airtelCode[i]) {
+      networkLogo.style.background = `url("Airtel-logo.png") center/100% 100%`
     }
-  };
-  
-  // ======= DO NOT EDIT ============== //
-  export default startApp;
+  }
+  //displaying mtn logo
+  for (let i = 0; i < mtnCode.length; i++) {
+    if (teleNo.value === mtnCode[i]) {
+      networkLogo.style.background = `url("mtn-logo.jpg") center/100% 100%`
+    }
+  }
+  //displaying glo logo
+  for (let i = 0; i < gloCode.length; i++) {
+    if (teleNo.value === gloCode[i]) {
+      networkLogo.style.background = `url("glo-logo.png") center/100% 100%`
+    }
+  }
+  //displaying 9mobile logo
+  for (let i = 0; i < etisalatCode.length; i++) {
+    if (teleNo.value === etisalatCode[i]) {
+      networkLogo.style.background = `url("9mobile-logo.png") center/100% 100%`
+    }
+  }
+
+}
+function submitt() {
+  let btn = document.querySelector("button");
+  btn.addEventListener("click", e => {
+    e.preventDefault();
+
+    if (fname.value.trim() === "") {
+      error.innerHTML = "*First name Cannot be empty"
+      error.style.color = "red"
+      fname.style.border = "1px solid red"
+      error.style.fontFamily = "monospace"
+      return false;
+    }
+    else {
+      fname.style.border = "1px solid green"
+
+    }
+    // last name validation
+    if (lname.value.trim() === "") {
+      error.innerHTML = "*Last name Cannot be empty"
+      error.style.color = "red"
+      lname.style.border = "1px solid red"
+      error.style.fontFamily = "monospace"
+      return false;
+    }
+    else {
+      lname.style.border = "1px solid green"
+    }
+    // email validations
+    if (!email.value.match(/^[a-zA-Z0-9_\.]+@([gmail]|[live]|[yahoo])+\.[a-z]{2,3}$/)) {
+      error.innerHTML = "*This is not an email"
+      error.style.color = "red"
+      email.style.border = "1px solid red"
+      error.style.fontFamily = "monospace"
+      return false;
+    } else {
+      email.style.border = "1px solid green"
+    }
+    // telephone number validations
+    if (teleNo.value.trim() === "") {
+      error.innerHTML = "*Cannot be empty"
+      error.style.color = "red"
+      teleNo.style.border = "1px solid red"
+      error.style.fontFamily = "monospace"
+      return false;
+    }
+    if (!teleNo.value.match(/^([0][8][0][2]|[0][9][0][2]|[0][7][0][1]|[0][8][0][8]|[0][7][0][8]|[0][8][1][2])[0-9]{7}$/)) {
+      error.innerHTML = "*Only Airtel no is allowed"
+      error.style.color = "tomato"
+      teleNo.style.border = "1px solid red"
+      return false;
+    } else {
+      teleNo.style.border = "1px solid green"
+    }
+
+    // validations for password
+    if (pass.value.length <= 7) {
+      error.innerHTML = "*Password must be more than 7 characters "
+      error.style.color = "red"
+      pass.style.border = "1px solid red"
+      error.style.fontFamily = "monospace"
+      return false;
+    }
+    else {
+      pass.style.border = "1px solid green"
+      error.innerHTML = ""
+      console.log("submitted")
+    }
+  })
+
+}
+
+function startApp() {
+
+  submitt();
+
+};
+
+// function submitBtn() {
+//   function send(Event) {
+//     // event.preventDefault();
+//     // console.log("hi");
+
+//   
+//   }
+// }
+// ======= DO NOT EDIT ============== //
+export default startApp;
   // ======= EEND DO NOT EDIT ========= //
